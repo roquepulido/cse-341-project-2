@@ -2,6 +2,7 @@ import express from 'express';
 import swaggerRouter from './swagger.js';
 import journalsRoutes from './journals.js';
 import commentsRoutes from './comments.js';
+import userRoutes from "./users.js";
 import { version } from '../server.js';
 import { HTTP } from '../util/const.js';
 
@@ -24,5 +25,7 @@ router.get('/test', (req, res) => {
 
 router.use('/journals', journalsRoutes);
 router.use('/comments', commentsRoutes);
+router.use('/users', userRoutes);
+
 
 export default router;

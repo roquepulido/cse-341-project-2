@@ -66,6 +66,17 @@ export const userValidationRules = () => {
       .withMessage("Param 'profilePicture' must be a valid URL")
   ];
 };
+export const userUpdateValidationRules = () => {
+  return [
+    body("oauthId").optional().notEmpty().withMessage("Param 'oauthId' is required"),
+    body("email").optional().isEmail().withMessage("Param 'email' must be a valid email"),
+    body("name").optional().notEmpty().withMessage("Param 'name' is required"),
+    body("profilePicture")
+      .optional()
+      .isURL()
+      .withMessage("Param 'profilePicture' must be a valid URL")
+  ];
+};
 
 export const validate = (req, res, next) => {
   const errors = validationResult(req);

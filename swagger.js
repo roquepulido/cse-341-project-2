@@ -24,6 +24,12 @@ const doc = {
       text: 'This is a sample comment.',
       commenter: '60d21b4667d0d8992e610c84'
     },
+    User: {
+      oauthId: '60d21b4667d0d8992e610c85',
+      email: 'user@example.com',
+      name: 'Sample User',
+      profilePicture: 'https://example.com/profile.jpg'
+    },
     Error: {
       message: 'Error message'
     }
