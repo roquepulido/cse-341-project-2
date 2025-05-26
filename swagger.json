@@ -1,0 +1,292 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Project 02 Journal API",
+    "version": "0.0.1",
+    "description": "API documentation"
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/version": {
+      "get": {
+        "tags": [
+          "Version"
+        ],
+        "summary": "Get API version",
+        "description": "Returns the current version of the API",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/test": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api-docs": {
+      "get": {
+        "tags": [
+          "Swagger-UI"
+        ],
+        "summary": "Swagger UI",
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/journals/": {
+      "get": {
+        "tags": [
+          "Journal"
+        ],
+        "summary": "Get all journals",
+        "description": "Returns a list of all journals",
+        "responses": {
+          "200": {
+            "description": "List of journals",
+            "schema": {
+              "$ref": "#/definitions/Journal"
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Journal"
+        ],
+        "summary": "Create a new journal",
+        "description": "Creates a new journal with the provided data",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Journal data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Journal"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Journal created",
+            "schema": {
+              "$ref": "#/definitions/Journal"
+            }
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    },
+    "/journals/{id}": {
+      "get": {
+        "tags": [
+          "Journal"
+        ],
+        "summary": "Get a journal by ID",
+        "description": "Returns a single journal by its ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the journal to retrieve"
+          }
+        ],
+        "responses": {
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Journal"
+        ],
+        "summary": "Update a journal by ID",
+        "description": "Updates an existing journal with the provided data",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the journal to update"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updated journal data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Journal"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Journal updated",
+            "schema": {
+              "$ref": "#/definitions/Journal"
+            }
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "404": {
+            "description": "Journal not found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Journal"
+        ],
+        "summary": "Delete a journal by ID",
+        "description": "Deletes a journal by its ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the journal to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Journal deleted"
+          },
+          "404": {
+            "description": "Journal not found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/journals/idUser/{id}": {
+      "get": {
+        "tags": [
+          "Journal"
+        ],
+        "summary": "Get journals by user ID",
+        "description": "Returns a list of journals associated with a specific user ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "idUser",
+            "in": "path",
+            "description": "ID of the user whose journals are to be retrieved",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "422": {
+            "description": "Unprocessable Entity"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Journal": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "Sample Journal"
+        },
+        "content": {
+          "type": "string",
+          "example": "This is a sample journal entry."
+        },
+        "author": {
+          "type": "string",
+          "example": "60d21b4667d0d8992e610c85"
+        },
+        "isPublic": {
+          "type": "boolean",
+          "example": true
+        },
+        "allowedViewers": {
+          "type": "array",
+          "example": [
+            "60d21b4667d0d8992e610c84",
+            "60d21b4667d0d8992e610c86"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "example": [
+            "tag1",
+            "tag2"
+          ],
+          "items": {
+            "type": "string"
+          }
+        },
+        "mood": {
+          "type": "string",
+          "example": "happy"
+        },
+        "location": {
+          "type": "string",
+          "example": "New York"
+        }
+      }
+    },
+    "Error": {
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string",
+          "example": "Error message"
+        }
+      }
+    }
+  }
+}
