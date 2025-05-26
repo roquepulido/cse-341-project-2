@@ -5,7 +5,7 @@ const commentsController = {
   // get all comments
   getComments: async (req, res) => {
     try {
-      const comments = await Comment.find();
+      const comments = await Comment.find().populate("commenter", "name profilePicture");
       res.status(HTTP.OK).json(comments);
     } catch (error) {
       console.error(`Error in commentsController.getComments: ${error}`);
@@ -19,7 +19,10 @@ const commentsController = {
   // get comment by ID
   getCommentById: async (req, res) => {
     try {
-      const comment = await Comment.findById(req.params.id);
+      const comment = await Comment.findById(req.params.id).populate(
+        "commenter",
+        "name profilePicture"
+      );
       if (!comment) {
         res.status(HTTP.NOT_FOUND).json({
           message: "Comment not found by ID: " + req.params.id
@@ -92,7 +95,10 @@ const commentsController = {
   },
   getCommentsByIdJournal: async (req, res) => {
     try {
-      const comments = await Comment.find({ journalId: req.params.id });
+      const comments = await Comment.find({ journalId: req.params.id }).populate(
+        "commenter",
+        "name profilePicture"
+      );
       if (!comments || comments.length === 0) {
         res.status(HTTP.NOT_FOUND).json({
           message: "No comments found for this journal ID"
