@@ -7,15 +7,11 @@
   },
   "host": "localhost:3000",
   "basePath": "/",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/version": {
       "get": {
-        "tags": [
-          "Version"
-        ],
+        "tags": ["Version"],
         "summary": "Get API version",
         "description": "Returns the current version of the API",
         "responses": {
@@ -37,9 +33,7 @@
     },
     "/api-docs": {
       "get": {
-        "tags": [
-          "Swagger-UI"
-        ],
+        "tags": ["Swagger-UI"],
         "summary": "Swagger UI",
         "description": "",
         "responses": {
@@ -51,9 +45,7 @@
     },
     "/journals/": {
       "get": {
-        "tags": [
-          "Journal"
-        ],
+        "tags": ["Journal"],
         "summary": "Get all journals",
         "description": "Returns a list of all journals",
         "responses": {
@@ -69,9 +61,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Journal"
-        ],
+        "tags": ["Journal"],
         "summary": "Create a new journal",
         "description": "Creates a new journal with the provided data",
         "parameters": [
@@ -100,9 +90,7 @@
     },
     "/journals/{id}": {
       "get": {
-        "tags": [
-          "Journal"
-        ],
+        "tags": ["Journal"],
         "summary": "Get a journal by ID",
         "description": "Returns a single journal by its ID",
         "parameters": [
@@ -121,9 +109,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Journal"
-        ],
+        "tags": ["Journal"],
         "summary": "Update a journal by ID",
         "description": "Updates an existing journal with the provided data",
         "parameters": [
@@ -163,9 +149,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Journal"
-        ],
+        "tags": ["Journal"],
         "summary": "Delete a journal by ID",
         "description": "Deletes a journal by its ID",
         "parameters": [
@@ -192,9 +176,7 @@
     },
     "/journals/idUser/{id}": {
       "get": {
-        "tags": [
-          "Journal"
-        ],
+        "tags": ["Journal"],
         "summary": "Get journals by user ID",
         "description": "Returns a list of journals associated with a specific user ID",
         "parameters": [
@@ -221,9 +203,7 @@
     },
     "/comments/id-journal/{id}": {
       "get": {
-        "tags": [
-          "Comments"
-        ],
+        "tags": ["Comments"],
         "summary": "Get comments by journal ID",
         "description": "Returns a list of comments associated with a specific journal ID",
         "parameters": [
@@ -253,9 +233,7 @@
     },
     "/comments/": {
       "post": {
-        "tags": [
-          "Comments"
-        ],
+        "tags": ["Comments"],
         "summary": "Create a new comment",
         "description": "Creates a new comment for a journal entry",
         "parameters": [
@@ -288,9 +266,7 @@
         }
       },
       "get": {
-        "tags": [
-          "Comments"
-        ],
+        "tags": ["Comments"],
         "summary": "Get all comments",
         "description": "Returns a list of all comments",
         "responses": {
@@ -308,9 +284,7 @@
     },
     "/comments/{id}": {
       "get": {
-        "tags": [
-          "Comments"
-        ],
+        "tags": ["Comments"],
         "summary": "Get a comment by ID",
         "description": "",
         "parameters": [
@@ -338,9 +312,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Comments"
-        ],
+        "tags": ["Comments"],
         "summary": "Update a comment",
         "description": "Updates an existing comment by ID",
         "parameters": [
@@ -383,9 +355,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Comments"
-        ],
+        "tags": ["Comments"],
         "summary": "Delete a comment",
         "description": "Deletes a comment by its ID",
         "parameters": [
@@ -412,9 +382,7 @@
     },
     "/users/": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Get all users",
         "description": "Returns a list of all users",
         "responses": {
@@ -442,9 +410,7 @@
         }
       },
       "post": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Create a new user",
         "description": "Creates a new user",
         "parameters": [
@@ -479,9 +445,7 @@
     },
     "/users/{id}": {
       "get": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Get user by ID",
         "description": "Returns a user by ID",
         "parameters": [
@@ -508,9 +472,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Update an existing user",
         "description": "Updates an existing user",
         "parameters": [
@@ -552,9 +514,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "Delete a user",
         "description": "Deletes a user by ID",
         "parameters": [
@@ -610,20 +570,14 @@
         },
         "allowedViewers": {
           "type": "array",
-          "example": [
-            "60d21b4667d0d8992e610c84",
-            "60d21b4667d0d8992e610c86"
-          ],
+          "example": ["60d21b4667d0d8992e610c84", "60d21b4667d0d8992e610c86"],
           "items": {
             "type": "string"
           }
         },
         "tags": {
           "type": "array",
-          "example": [
-            "tag1",
-            "tag2"
-          ],
+          "example": ["tag1", "tag2"],
           "items": {
             "type": "string"
           }

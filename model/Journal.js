@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const journalSchema = new Schema(
@@ -13,7 +13,7 @@ const journalSchema = new Schema(
     },
     author: {
       type: Schema.Types.ObjectId,
-      ref: 'User',
+      ref: "User",
       required: true
     },
     isPublic: {
@@ -23,7 +23,7 @@ const journalSchema = new Schema(
     allowedViewers: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: "User"
       }
     ],
     tags: [
@@ -43,5 +43,5 @@ const journalSchema = new Schema(
   }
 );
 
-const Journal = mongoose.model('Journal', journalSchema, 'journals');
+const Journal = mongoose.model("Journal", journalSchema, "journals");
 export default Journal;

@@ -1,5 +1,10 @@
 import { Router } from "express";
-import { commentValidationRules,commentUpdateValidationRules, idValidationRules, validate } from "../helpers/validate.js";
+import {
+  commentValidationRules,
+  commentUpdateValidationRules,
+  idValidationRules,
+  validate
+} from "../helpers/validate.js";
 import commentsController from "../controllers/commentsController.js";
 
 const router = Router();
