@@ -19,6 +19,11 @@ const doc = {
       mood: 'happy',
       location: 'New York'
     },
+    Comment: {
+      journalId: '60d21b4667d0d8992e610c85',
+      text: 'This is a sample comment.',
+      commenter: '60d21b4667d0d8992e610c84'
+    },
     Error: {
       message: 'Error message'
     }

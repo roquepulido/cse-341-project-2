@@ -1,18 +1,30 @@
 import { body, param, validationResult } from "express-validator";
+import { HTTP } from "../util/const.js";
 
-const idUserValidationRules = () => {
-  return [param("id").isMongoId().withMessage("Invalid user ID")];
+export const idValidationRules = () => {
+  return [param("id").isMongoId().withMessage("Invalid ID")];
 };
 
-const commentValidationRules = () => {
+export const commentValidationRules = () => {
   return [
-    body("journalId").isMongoId().withMessage("Invalid journal ID"),
-    body("text").notEmpty().withMessage("Comment text is required"),
-    body("commenter").isMongoId().withMessage("Invalid commenter ID")
+    body("journalId").isMongoId().withMessage("Param 'journalId' is Invalid ID"),
+    body("text").notEmpty().withMessage("Param 'text' is required"),
+    body("commenter").isMongoId().withMessage("Param 'commenter' is Invalid commenter ID")
   ];
 };
 
-const journalValidationRules = () => {
+export const commentUpdateValidationRules = () => {
+  return [
+    body("journalId").optional().isMongoId().withMessage("Param 'journalId' is Invalid ID"),
+    body("text").optional().notEmpty().withMessage("Param 'text' is required"),
+    body("commenter")
+      .optional()
+      .isMongoId()
+      .withMessage("Param 'commenter' is Invalid commenter ID")
+  ];
+};
+
+export const journalValidationRules = () => {
   return [
     body("title").notEmpty().withMessage("Param 'title' is required"),
     body("content").notEmpty().withMessage("Param 'content' is required"),
@@ -29,7 +41,7 @@ const journalValidationRules = () => {
   ];
 };
 
-const journalUpdateValidationRules = () => [
+export const journalUpdateValidationRules = () => [
   body("title").optional().notEmpty().withMessage("Param 'title' is required"),
   body("content").optional().notEmpty().withMessage("Param 'content' is required"),
   body("author").optional().isMongoId().withMessage("Param 'author' is Invalid ID"),
@@ -43,7 +55,7 @@ const journalUpdateValidationRules = () => [
   body("location").optional().isString().withMessage("Param 'location' must be a string")
 ];
 
-const userValidationRules = () => {
+export const userValidationRules = () => {
   return [
     body("oauthId").notEmpty().withMessage("Param 'oauthId' is required"),
     body("email").isEmail().withMessage("Param 'email' must be a valid email"),
@@ -55,7 +67,7 @@ const userValidationRules = () => {
   ];
 };
 
-const validate = (req, res, next) => {
+export const validate = (req, res, next) => {
   const errors = validationResult(req);
   if (errors.isEmpty()) {
     return next();
@@ -64,16 +76,7 @@ const validate = (req, res, next) => {
   const extractedErrors = [];
   errors.array().map((err) => extractedErrors.push(err.msg));
 
-  return res.status(422).json({
+  return res.status(HTTP.UNPROCESSABLE_ENTITY).json({
     errors: extractedErrors
   });
-};
-
-export {
-  idUserValidationRules,
-  journalValidationRules,
-  journalUpdateValidationRules,
-  commentValidationRules,
-  userValidationRules,
-  validate
 };

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {
   journalValidationRules,
-  idUserValidationRules,
+  idValidationRules,
   validate,
   journalUpdateValidationRules
 } from "../helpers/validate.js";
@@ -37,7 +37,7 @@ router.get(
     }
   */
   "/:id",
-  idUserValidationRules(),
+  idValidationRules(),
   validate,
   journalsController.getJournalById
 );
@@ -55,7 +55,7 @@ router.get(
     }
   */
   "/idUser/:id",
-  idUserValidationRules(),
+  idValidationRules(),
   validate,
   journalsController.getJournalsByIdUser
 );
@@ -109,7 +109,7 @@ router.put(
     #swagger.responses[500] = { description: 'Internal server error' }
 */
   "/:id",
-  idUserValidationRules(),
+  idValidationRules(),
   journalUpdateValidationRules(),
   validate,
   journalsController.updateJournal
@@ -131,7 +131,7 @@ router.delete(
     #swagger.responses[500] = { description: 'Internal server error' }
 */
   "/:id",
-  idUserValidationRules(),
+  idValidationRules(),
   validate,
   journalsController.deleteJournal
 );

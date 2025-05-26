@@ -94,9 +94,6 @@
           },
           "400": {
             "description": "Invalid data"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
           }
         }
       }
@@ -118,8 +115,8 @@
           }
         ],
         "responses": {
-          "422": {
-            "description": "Unprocessable Entity"
+          "default": {
+            "description": ""
           }
         }
       },
@@ -160,9 +157,6 @@
           "404": {
             "description": "Journal not found"
           },
-          "422": {
-            "description": "Unprocessable Entity"
-          },
           "500": {
             "description": "Internal server error"
           }
@@ -189,9 +183,6 @@
           },
           "404": {
             "description": "Journal not found"
-          },
-          "422": {
-            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal server error"
@@ -222,8 +213,199 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/comments/id-journal/{id}": {
+      "get": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Get comments by journal ID",
+        "description": "Returns a list of comments associated with a specific journal ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the journal whose comments are to be retrieved"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of comments",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          },
+          "404": {
+            "description": "Journal not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/comments/": {
+      "post": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Create a new comment",
+        "description": "Creates a new comment for a journal entry",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Comment object to be created",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Comment created successfully",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
           "422": {
             "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Get all comments",
+        "description": "Returns a list of all comments",
+        "responses": {
+          "200": {
+            "description": "List of comments",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/comments/{id}": {
+      "get": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Get a comment by ID",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Comment ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment found",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          },
+          "404": {
+            "description": "Comment not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Update a comment",
+        "description": "Updates an existing comment by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the comment to update"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Updated comment data",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment updated successfully",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "404": {
+            "description": "Comment not found"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Comments"
+        ],
+        "summary": "Delete a comment",
+        "description": "Deletes a comment by its ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the comment to delete"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment deleted successfully"
+          },
+          "404": {
+            "description": "Comment not found"
+          },
+          "500": {
+            "description": "Internal server error"
           }
         }
       }
@@ -276,6 +458,23 @@
         "location": {
           "type": "string",
           "example": "New York"
+        }
+      }
+    },
+    "Comment": {
+      "type": "object",
+      "properties": {
+        "journalId": {
+          "type": "string",
+          "example": "60d21b4667d0d8992e610c85"
+        },
+        "text": {
+          "type": "string",
+          "example": "This is a sample comment."
+        },
+        "commenter": {
+          "type": "string",
+          "example": "60d21b4667d0d8992e610c84"
         }
       }
     },
