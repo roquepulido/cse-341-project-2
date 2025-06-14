@@ -4,8 +4,7 @@ import { HTTP } from "../util/const.js";
 
 const journalsController = {
   getAllJournals: async (req, res) => {
-    console.log("journalsController.getAllJournals called");
-
+    console.debug("[GET] /journals - journalsController.getAllJournals", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     try {
       const journals = await Journal.find();
       res.status(HTTP.OK).json(journals);
@@ -19,8 +18,7 @@ const journalsController = {
   },
 
   getJournalById: async (req, res) => {
-    console.log("journalsController.getJournalById called with ID:", req.params.id);
-
+    console.debug("[GET] /journals/:id - journalsController.getJournalById", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     try {
       const journal = await Journal.findById(req.params.id);
       if (!journal) {
@@ -35,7 +33,6 @@ const journalsController = {
         ...journal.toObject(),
         comments
       };
-
       res.status(HTTP.OK).json(journalWithComments);
     } catch (err) {
       console.error(`Error in journalsController.getJournalById: ${err}`);
@@ -47,8 +44,7 @@ const journalsController = {
   },
 
   createJournal: async (req, res) => {
-    console.log("journalsController.createJournal called with body:", req.body);
-
+    console.debug("[POST] /journals - journalsController.createJournal", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     const journal = new Journal(req.body);
     try {
       const savedJournal = await journal.save();
@@ -63,9 +59,7 @@ const journalsController = {
   },
 
   updateJournal: async (req, res) => {
-    console.log("journalsController.updateJournal called with ID:", req.params.id);
-    console.log("Update data:", req.body);
-
+    console.debug("[PUT] /journals/:id - journalsController.updateJournal", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     try {
       const updatedJournal = await Journal.findByIdAndUpdate(req.params.id, req.body, {
         new: true
@@ -86,6 +80,7 @@ const journalsController = {
   },
 
   deleteJournal: async (req, res) => {
+    console.debug("[DELETE] /journals/:id - journalsController.deleteJournal", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     try {
       const deletedJournal = await Journal.findByIdAndDelete(req.params.id);
       if (!deletedJournal) {
@@ -104,6 +99,7 @@ const journalsController = {
   },
 
   getJournalsByIdUser: async (req, res) => {
+    console.debug("[GET] /journals/idUser/:id - journalsController.getJournalsByIdUser", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     try {
       const journals = await Journal.find({ idUser: req.params.idUser });
       if (!journals || journals.length === 0) {

@@ -4,6 +4,7 @@ import { HTTP } from "../util/const.js";
 const commentsController = {
   // get all comments
   getComments: async (req, res) => {
+    console.debug("[GET] /comments - commentsController.getComments", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     try {
       const comments = await Comment.find().populate("commenter", "name profilePicture");
       res.status(HTTP.OK).json(comments);
@@ -18,6 +19,7 @@ const commentsController = {
 
   // get comment by ID
   getCommentById: async (req, res) => {
+    console.debug("[GET] /comments/:id - commentsController.getCommentById", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     try {
       const comment = await Comment.findById(req.params.id).populate(
         "commenter",
@@ -41,6 +43,7 @@ const commentsController = {
 
   // create a new comment
   createComment: async (req, res) => {
+    console.debug("[POST] /comments - commentsController.createComment", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     const comment = new Comment(req.body);
     try {
       const savedComment = await comment.save();
@@ -55,6 +58,7 @@ const commentsController = {
   },
 
   updateComment: async (req, res) => {
+    console.debug("[PUT] /comments/:id - commentsController.updateComment", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     try {
       const updatedComment = await Comment.findByIdAndUpdate(req.params.id, req.body, {
         new: true
@@ -76,6 +80,7 @@ const commentsController = {
   },
 
   deleteComment: async (req, res) => {
+    console.debug("[DELETE] /comments/:id - commentsController.deleteComment", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     try {
       const deletedComment = await Comment.findByIdAndDelete(req.params.id);
       if (!deletedComment) {
@@ -94,6 +99,7 @@ const commentsController = {
     }
   },
   getCommentsByIdJournal: async (req, res) => {
+    console.debug("[GET] /comments/id-journal/:id - commentsController.getCommentsByIdJournal", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     try {
       const comments = await Comment.find({ journalId: req.params.id }).populate(
         "commenter",

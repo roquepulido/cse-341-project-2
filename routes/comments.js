@@ -1,11 +1,12 @@
 import { Router } from "express";
+import commentsController from "../controllers/commentsController.js";
 import {
   commentValidationRules,
   commentUpdateValidationRules,
   idValidationRules,
   validate
 } from "../helpers/validate.js";
-import commentsController from "../controllers/commentsController.js";
+import { authenticateJWT } from "../middleware/authenticateJWT.js";
 
 const router = Router();
 router.get(
@@ -54,6 +55,7 @@ router.post(
     #swagger.responses[422] = { description: 'Unprocessable Entity' }
     */
   "/",
+  authenticateJWT,
   commentValidationRules(),
   validate,
   commentsController.createComment
@@ -119,6 +121,7 @@ router.put(
     #swagger.responses[422] = { description: 'Unprocessable Entity' }
     */
   "/:id",
+  authenticateJWT,
   idValidationRules(),
   commentUpdateValidationRules(),
   validate,
@@ -141,6 +144,7 @@ router.delete(
     #swagger.responses[500] = { description: 'Internal server error' }
     */
   "/:id",
+  authenticateJWT,
   idValidationRules(),
   validate,
   commentsController.deleteComment

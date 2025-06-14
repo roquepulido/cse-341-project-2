@@ -85,7 +85,10 @@
           "400": {
             "description": "Invalid data"
           }
-        }
+        },
+        "security": [
+          { "BearerAuth": [] }
+        ]
       }
     },
     "/journals/{id}": {
@@ -146,7 +149,10 @@
           "500": {
             "description": "Internal server error"
           }
-        }
+        },
+        "security": [
+          { "BearerAuth": [] }
+        ]
       },
       "delete": {
         "tags": ["Journal"],
@@ -171,7 +177,10 @@
           "500": {
             "description": "Internal server error"
           }
-        }
+        },
+        "security": [
+          { "BearerAuth": [] }
+        ]
       }
     },
     "/journals/idUser/{id}": {
@@ -440,7 +449,10 @@
           "500": {
             "description": "Internal server error"
           }
-        }
+        },
+        "security": [
+          { "BearerAuth": [] }
+        ]
       }
     },
     "/users/{id}": {
@@ -511,7 +523,10 @@
           "500": {
             "description": "Internal server error"
           }
-        }
+        },
+        "security": [
+          { "BearerAuth": [] }
+        ]
       },
       "delete": {
         "tags": ["Users"],
@@ -544,7 +559,10 @@
           "500": {
             "description": "Internal server error"
           }
-        }
+        },
+        "security": [
+          { "BearerAuth": [] }
+        ]
       }
     }
   },
@@ -638,6 +656,14 @@
           "example": "Error message"
         }
       }
+    }
+  },
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Insert the token with format: Bearer {token}"
     }
   }
 }

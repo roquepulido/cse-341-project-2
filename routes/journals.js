@@ -1,11 +1,12 @@
 import { Router } from "express";
+import journalsController from "../controllers/journalsController.js";
 import {
   journalValidationRules,
   idValidationRules,
   validate,
   journalUpdateValidationRules
 } from "../helpers/validate.js";
-import journalsController from "../controllers/journalsController.js";
+import { authenticateJWT } from "../middleware/authenticateJWT.js";
 
 const router = Router();
 // returns all journals
@@ -78,6 +79,7 @@ router.post(
    #swagger.responses[400] = { description: 'Invalid data' }
 */
   "/",
+  authenticateJWT,
   journalValidationRules(),
   validate,
   journalsController.createJournal
@@ -109,6 +111,7 @@ router.put(
     #swagger.responses[500] = { description: 'Internal server error' }
 */
   "/:id",
+  authenticateJWT,
   idValidationRules(),
   journalUpdateValidationRules(),
   validate,
@@ -131,6 +134,7 @@ router.delete(
     #swagger.responses[500] = { description: 'Internal server error' }
 */
   "/:id",
+  authenticateJWT,
   idValidationRules(),
   validate,
   journalsController.deleteJournal

@@ -33,6 +33,14 @@ const doc = {
     Error: {
       message: "Error message"
     }
+  },
+  securityDefinitions: {
+    BearerAuth: {
+      type: "apiKey",
+      name: "Authorization",
+      in: "header",
+      description: "Ingrese el token JWT con el formato: Bearer {token}"
+    }
   }
 };
 const outputFile = "./swagger.json";

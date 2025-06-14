@@ -3,6 +3,7 @@ import { HTTP } from "../util/const.js";
 
 const userController = {
   async getAllUsers(req, res) {
+    console.debug("[GET] /users - userController.getAllUsers", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     try {
       const users = await User.find();
       res.status(HTTP.OK).json(users);
@@ -12,6 +13,7 @@ const userController = {
   },
 
   async getUserById(req, res) {
+    console.debug("[GET] /users/:id - userController.getUserById", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     try {
       const user = await User.findById(req.params.id);
       if (!user) {
@@ -24,6 +26,7 @@ const userController = {
   },
 
   async createUser(req, res) {
+    console.debug("[POST] /users - userController.createUser", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     const { oauthId, email, name, profilePicture } = req.body;
     const newUser = new User({
       oauthId,
@@ -40,6 +43,7 @@ const userController = {
     }
   },
   updateUser: async (req, res) => {
+    console.debug("[PUT] /users/:id - userController.updateUser", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     try {
       const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
       if (!updatedUser) {
@@ -51,6 +55,7 @@ const userController = {
     }
   },
   deleteUser: async (req, res) => {
+    console.debug("[DELETE] /users/:id - userController.deleteUser", { method: req.method, url: req.originalUrl, query: req.query, params: req.params, body: req.body });
     try {
       const deletedUser = await User.findByIdAndDelete(req.params.id);
       if (!deletedUser) {

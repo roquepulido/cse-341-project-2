@@ -1,11 +1,12 @@
 import { Router } from "express";
+import usersController from "../controllers/userController.js";
 import {
   userValidationRules,
   userUpdateValidationRules,
   idValidationRules,
   validate
 } from "../helpers/validate.js";
-import usersController from "../controllers/userController.js";
+import { authenticateJWT } from "../middleware/authenticateJWT.js";
 
 const router = Router();
 router.get(
@@ -78,6 +79,7 @@ router.post(
     }
     */
   "/",
+  authenticateJWT,
   userValidationRules(),
   validate,
   usersController.createUser
@@ -112,6 +114,7 @@ router.put(
     }
     */
   "/:id",
+  authenticateJWT,
   idValidationRules(),
   userUpdateValidationRules(),
   validate,
@@ -136,6 +139,7 @@ router.delete(
     }
     */
   "/:id",
+  authenticateJWT,
   idValidationRules(),
   validate,
   usersController.deleteUser
